@@ -1,7 +1,5 @@
 # ASP.NET Core Identity Yapılandırma ve Kullanım Kılavuzu
 
-Bu doküman, projede ASP.NET Core Identity framework'ünün nasıl yapılandırıldığını ve kullanıldığını adım adım açıklamaktadır.
-
 ## 0. Gerekli NuGet Paketleri
 
 Identity ve Entity Framework Core kullanımı için aşağıdaki paketlerin projeye yüklenmesi gerekmektedir:
