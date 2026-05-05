@@ -36,9 +36,9 @@
                     <ul class="navbar-nav">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            var user = await UserManager.GetUserAsync(User);
+                            
                             <li class="nav-item">
-                                @user?.Ad @user?.Soyad
+                                @User.FindFirst("TamAd")?.Value
                             </li>
                             <li>
                                 <form asp-action="Logout" asp-controller="Account" method="post">

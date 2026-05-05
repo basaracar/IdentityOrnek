@@ -8,8 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+#if DEBUG
 builder.Services.AddDbContext<AppdbContext>(options=>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+#else
+builder.Services.AddDbContext<AppdbContext>(options=>
+    options.UseSqlite(builder.Configuration.GetConnectionString("SQLConnection")));
+
+#endif
 //***********IDENTITY SERVİSİ EKLİYORUZ**************************
 builder.Services.AddIdentity<AppUser,IdentityRole>(options=>{
     options.Password.RequireDigit=false;
@@ -45,6 +51,20 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+using (var scope =app.Services.CreateScope())
+{
+    var services=scope.ServiceProvider;
+    
+    try
+    {
+        await DbSeeder.RoleEkle(services);
+    }
+    catch (System.Exception ex)
+    {
+        
+       Console.WriteLine("Besleme Hatası",ex.Message);
+    }
 
+}
 
 app.Run();
