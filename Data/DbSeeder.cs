@@ -34,6 +34,8 @@ namespace IdentityOrnek.Data
                     Email = adminMail,
                     Ad = "Başar",
                     Soyad = "ACAROĞLU",
+                    Adres="İzmir",
+                    Telefon="555 555 55 55",
                     EmailConfirmed = true
                 };
 
@@ -42,6 +44,7 @@ namespace IdentityOrnek.Data
                 {
                     await userManager.AddClaimAsync(newAdmin, new Claim("TamAd", newAdmin.Ad + " " + newAdmin.Soyad));
                     await userManager.AddToRoleAsync(newAdmin,"Admin");
+                    Console.WriteLine("Kullanıcı Eklendi");
                 }
 
 
